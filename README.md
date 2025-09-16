@@ -1,12 +1,8 @@
 # Crypto Tracking App
 
-The names of the apps and the installer,
-
 To run the installer you must run database_installer.py AFTER creating a new SQL database named cryptodatabase, if 
 successful you will see Records Created & Tables Created. If you want a clean load of the database run table_dropper.py
 to drop the tables and it prompts you if you would like to run the installer after they have been wiped.
-
-(Main App description here)
 
 Crypto Portfolio Tracker is a simplified app that helps users monitor their cryptocurrency investments. A user can 
 create a portfolio by adding various cryptocurrencies by filling in the name, symbol, and purchase particulars of the 
@@ -24,10 +20,6 @@ prices of the coins you have entered head to the refresh screen and press the 'R
 price from CoinGecko. To view the coins in your watchlist head to the 'View Watchlist' screen, and you will see your entry
 name, symbol, price, and target price if you set one. The target price will appear green if your target has exceeded the
 current price letting you know that the target has been reached, but until then it will appear gold.
-
-
-
-The status of the apps in terms of completeness and correctness (list any known issues or bugs),
 
 Watchlist app completeness:
 
@@ -49,3 +41,6 @@ Instructions for building and running the apps, including any required dependenc
 To run the apps you must first run the database_installer.py, have Kivy installed, SQLAlchemy, and a database
 named cryptodatabase. Next run startup.py and enter your MySQL password, from here you can navigate to any of the apps
 easily and you do not need to type it in again until your next run of the app. 
+
+
+Created by Sean, Levi , and Ryan
