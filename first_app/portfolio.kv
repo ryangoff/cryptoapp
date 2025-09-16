@@ -1,0 +1,266 @@
+<MainMenuScreen>:
+    canvas.before:
+        Color:
+            rgba: 0.1, 0.1, 0.2, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 25
+
+        Label:
+            text: "Portfolio Tracker"
+            font_size: 36
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: 70
+
+        Button:
+            text: "Add New Cryptocurrency"
+            font_size: 20
+            background_color: 0.2, 0.6, 0.8, 1
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: 60
+            on_release: root.manager.current = 'new_crypto'
+
+        Button:
+            text: "Add Portfolio Entry"
+            font_size: 20
+            background_color: 0.4, 0.7, 0.3, 1
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: 60
+            on_release: root.manager.current = 'new_entry'
+
+        Button:
+            text: "Check Portfolio Value"
+            font_size: 20
+            background_color: 0.7, 0.5, 0.2, 1
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: 60
+            on_release: root.manager.current = 'portfolio_value'
+
+        Button:
+            text: "Manage Cryptocurrencies"
+            font_size: 20
+            background_color: 0.5, 0.3, 0.7, 1
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: 60
+            on_release: root.manager.current = 'manage_crypto'
+
+
+<NewCryptoScreen>:
+    canvas.before:
+        Color:
+            rgba: 0.05, 0.1, 0.15, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+
+        Label:
+            text: "Add New Cryptocurrency"
+            font_size: 28
+            color: 1, 1, 1, 1
+
+        TextInput:
+            id: crypto_name
+            hint_text: "Cryptocurrency Name"
+            font_size: 18
+            multiline: False
+
+        TextInput:
+            id: crypto_symbol
+            hint_text: "Symbol (e.g. BTC)"
+            font_size: 18
+            multiline: False
+
+        TextInput:
+            id: crypto_price
+            hint_text: "Current Price (e.g. 65000)"
+            input_filter: 'float'
+            font_size: 18
+            multiline: False
+
+        Label:
+            id: crypto_message
+            text: ""
+            color: 1, 0.3, 0.3, 1  # reddish error
+            font_size: 16
+
+        Button:
+            text: "Add Cryptocurrency"
+            font_size: 20
+            background_color: 0.2, 0.6, 0.8, 1
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: 55
+            on_release: root.submit_crypto()
+
+        Button:
+            text: "Back to Menu"
+            font_size: 18
+            background_color: 0.4, 0.4, 0.4, 1
+            color: 1, 1, 1, 1
+            on_release: root.manager.current = 'menu'
+
+
+<NewEntryScreen>:
+    canvas.before:
+        Color:
+            rgba: 0.07, 0.1, 0.18, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+
+        Label:
+            text: "Add Portfolio Entry"
+            font_size: 28
+            color: 1, 1, 1, 1
+
+        TextInput:
+            id: entry_symbol
+            hint_text: "Symbol (e.g. BTC)"
+            font_size: 18
+            multiline: False
+
+        TextInput:
+            id: entry_quantity
+            hint_text: "Quantity Purchased"
+            input_filter: 'float'
+            font_size: 18
+            multiline: False
+
+        TextInput:
+            id: entry_date
+            hint_text: "Purchase Date (YYYY-MM-DD)"
+            font_size: 18
+            multiline: False
+
+        Label:
+            id: entry_message
+            text: ""
+            color: 1, 0.3, 0.3, 1
+            font_size: 16
+
+        Button:
+            text: "Add Entry"
+            font_size: 20
+            background_color: 0.4, 0.7, 0.3, 1
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: 55
+            on_release: root.submit_entry()
+
+        Button:
+            text: "Back to Menu"
+            font_size: 18
+            background_color: 0.4, 0.4, 0.4, 1
+            color: 1, 1, 1, 1
+            on_release: root.manager.current = 'menu'
+
+
+<PortfolioValueScreen>:
+    canvas.before:
+        Color:
+            rgba: 0.1, 0.08, 0.18, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+
+        Label:
+            text: "Portfolio Value"
+            font_size: 28
+            color: 1, 1, 1, 1
+
+        ScrollView:
+            GridLayout:
+                id: summary_container
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: None
+            height: 50
+            spacing: 10
+
+            Button:
+                text: "Refresh Prices"
+                font_size: 18
+                background_color: 0.3, 0.5, 0.9, 1
+                color: 1, 1, 1, 1
+                on_press: root.refresh_prices()
+
+            Button:
+                text: "Refresh"
+                font_size: 18
+                background_color: 0.3, 0.5, 0.9, 1
+                color: 1, 1, 1, 1
+                on_press: root.refresh_prices()
+
+        Button:
+            text: "Back to Menu"
+            font_size: 18
+            background_color: 0.4, 0.4, 0.4, 1
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: 50
+            on_release: root.manager.current = 'menu'
+
+<ManageCryptoScreen>:
+    canvas.before:
+        Color:
+            rgba: 0.1, 0.1, 0.2, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 40
+        spacing: 20
+
+        Label:
+            text: "Manage Cryptocurrencies"
+            font_size: 28
+            color: 1, 1, 1, 1
+
+        ScrollView:
+            GridLayout:
+                id: crypto_container
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+
+        Button:
+            text: "Back to Menu"
+            font_size: 18
+            background_color: 0.4, 0.4, 0.4, 1
+            color: 1, 1, 1, 1
+            size_hint_y: None
+            height: 50
+            on_release: root.manager.current = 'menu'

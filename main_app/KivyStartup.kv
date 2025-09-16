@@ -1,0 +1,162 @@
+ScreenManager:
+    LoginScreen:
+    OptionScreen:
+    HelpScreen:
+    BlackScreen:
+
+<LoginScreen@Screen>:
+    name:'login'
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: .532, .532, .532, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: 'User Login'
+            font_size: '40'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+
+        Label:
+            text: 'Please Log In to Your Account'
+            font_size: '25'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.7}
+
+        Spinner:
+            id: dropdown
+            text_autoupdate: True
+            text: 'Select your username'
+            size_hint: (0.4,0.05)
+            pos_hint: {'center_x': 0.4, 'center_y': 0.5}
+            background_color: 0.2, 0.6, 1, 1
+
+        Button:
+            text: 'Choose \nProfile'
+            size_hint: (0.15, 0.05)
+            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+            background_color: 0.2, 0.6, 1, 1
+            on_press: root.manager.current = 'menu'
+
+        TextInput:
+            id: username
+            multiline: False
+            hint_text: 'Username'
+            size_hint: (0.3,0.05)
+            pos_hint: {'center_x': 0.4, 'center_y': 0.3}
+
+        Button:
+            id: create_user
+            text: 'Create \nProfile'
+            size_hint: (0.15, 0.05)
+            pos_hint: {'center_x': 0.65, 'center_y': 0.3}
+            background_color: 0.2, 0.6, 1, 1
+            on_press: app.profile()
+        Label:
+            id: message
+            text: ''
+            font_size: 20
+            pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+
+<OptionScreen@Screen>:
+    name: 'menu'
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: .532, .532, .532, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text:'Navigation Dashboard'
+            font_size: 40
+
+        Label:
+            text: 'please choose an option'
+            font_size: 25
+        Button:
+            text: 'Portfolio Tracker App'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+            size_hint: None, None
+            size: 300, 100
+            background_color: 0.2, 0.6, 1, 1
+            on_press: app.open_portfolio()
+
+
+        Button:
+            text: 'Crypto Watchlist App'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+            size_hint: None, None
+            size: 300, 100
+            background_color: 0.2, 0.6, 1, 1
+            on_press: root.manager.current = 'black'
+            on_press: app.open_watchlist()
+
+        Button:
+            text: 'About/Help'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+            size_hint: None, None
+            size: 300, 100
+            background_color: 0.2, 0.6, 1, 1
+            on_press: root.manager.current = 'help'
+        Button:
+            text: 'Switch Users'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+            size_hint: None, None
+            size: 300, 100
+            background_color: 0.2, 0.6, 1, 1
+            on_press: root.manager.current = 'login'
+
+<HelpScreen@Screen>:
+    name: 'help'
+    FloatLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: .532, .532, .532, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        Label:
+            text: 'About the App'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+            font_size: 40
+        Label:
+            text: 'This app is designed\n to help the fellow crypto \n buyer an easy way to track and\n manage their investment.'
+            multiline: True
+            pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+            font_size: 25
+        Label:
+            text: 'Watchlist'
+            multiline: True
+            pos_hint: {'center_x': 0.5, 'center_y': 0.62}
+            font_size: 17
+        Label:
+            text: 'This app allows you to enter different crypto\n coins so you can see the current price of the coin.\n You will need the name, symbol, and the\n target price you want it at to have one added.\n Once added, click on the view watchlist and your\n list of coins and last refreshed price will be there.\n In order to refresh the price you will need\n to click the refresh price button.'
+            multiline: True
+            pos_hint: {'center_x': 0.52, 'center_y': 0.5}
+            font_size: 17
+        Label:
+            text: 'Portfolio'
+            multiline: True
+            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+            font_size: 17
+        Label:
+            text: 'This will allow you to see\n what your portfolio coins are at.\n You would first need to add the coin to \n the portfolio then you need to add how\n much you bought of it and when.\n Then afterwards you can click on the view\n portfolio where you can refresh your prices.'
+            multiline: True
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+            font_size: 17
+        Button:
+            text: 'Back'
+            pos_hint: {'center_x': 0.1, 'center_y': 0.9}
+            size_hint: 0.1, 0.05
+            background_color: 0.2, 0.6, 1, 1
+            on_press: root.manager.current = 'menu'
+
+<BlackScreen@Screen>:
+    name: 'black'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text:''

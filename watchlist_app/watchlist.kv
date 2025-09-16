@@ -1,0 +1,250 @@
+ScreenManager:
+    MenuScreen:
+    ViewScreen:
+    EntryScreen:
+    RefreshScreen:
+
+<MenuScreen@Screen>:
+    name: 'menu'
+    BoxLayout:
+        canvas.before:
+            Color:
+                rgba: .532, .532, .532, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                halign: 'center'
+                text: 'Crypto Watchlist\nMain Menu'
+                color: 1, 1, 1, 1
+                font_size: 80
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: None, None
+            size: self.minimum_size
+            pos_hint: {'center_x': 0.5}
+            spacing: 20
+
+            Button:
+                text: 'New\nWatchlist\nEntry'
+                halign: 'center'
+                color: 1, 1, 1, 1
+                size_hint: None, None
+                size: 300, 100
+                background_color: 0.2, 0.6, 1, 1
+                on_press: root.manager.current = 'entry'
+
+            Button:
+                text: 'View\nWatchlist'
+                halign: 'center'
+                color: 1, 1, 1, 1
+                size_hint: None, None
+                size: 300, 100
+                background_color: 0.2, 0.6, 1, 1
+                on_press: app.fill_watchlist()
+                on_press: root.manager.current = 'view'
+
+            Button:
+                text: 'Refresh\nPrices'
+                halign: 'center'
+                color: 1, 1, 1, 1
+                size_hint: None, None
+                size: 300, 100
+                background_color: 0.2, 0.6, 1, 1
+                on_press: root.manager.current = 'refresh'
+
+<ViewScreen@Screen>:
+    name: 'view'
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: .532, .532, .532, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: 'Crypto Watchlist\nView Watchlist'
+            font_size: 80
+            halign : 'center'
+            color: 1, 1, 1, 1
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.5, 'top': 0.75}
+        BoxLayout:
+            orientation: 'vertical'
+            BoxLayout:
+                id: titles
+                orientation: 'horizontal'
+                Label:
+                    id: title_name
+                    font_size:60
+                    text: 'Name'
+                Label:
+                    id: title_symbol
+                    font_size:60
+                    text: 'Symbol'
+                Label:
+                    id: title_price
+                    font_size:60
+
+                    text: 'Price'
+                Label:
+                    id: title_target
+                    font_size:60
+                    halign: 'center'
+                    text: 'Target\nPrice'
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+
+                GridLayout:
+                    id: watchlist
+                    cols: 1
+                    height: self.minimum_height
+
+
+        Button:
+            text: 'Main\nMenu'
+            size_hint: None, None
+            size: 300, 100
+            halign : 'center'
+            pos_hint: {'center_x': 0.5, 'y': 0.1}
+            background_color: 0.2, 0.6, 1, 1
+            on_press: root.manager.current = 'menu'
+            on_press: app.wipe_popup_labels()
+
+<EntryScreen@Screen>: # needs popup then done
+    name: 'entry'
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: .532, .532, .532, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: 'Crypto Watchlist\nNew Entry'
+            font_size: 80
+            halign : 'center'
+            color: 1, 1, 1, 1
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.5, 'top': 0.75}
+        TextInput:
+            id: name_input
+            halign: 'center'
+            valign: 'middle'
+            hint_text: 'Name'
+            write_tab: False
+            color: 0, 0, 0, 1
+            font_size: 40
+            multiline: False
+            size_hint: (.19,.05)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.50}
+
+        TextInput:
+            id: symbol_input
+            halign: 'center'
+            valign: 'middle'
+            hint_text: 'Symbol'
+            write_tab: False
+            color: 0, 0, 0, 1
+            font_size: 40
+            multiline: False
+            size_hint: (.19,.05)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.40}
+        TextInput:
+            id: target_input
+            halign: 'center'
+            valign: 'middle'
+            hint_text: 'Target Price'
+            input_filter: 'float'
+            write_tab: False
+            color: 0, 0, 0, 1
+            font_size: 40
+            multiline: False
+            size_hint: (.19,.05)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.30}
+        Label:
+            id: success_submit
+            text: ''
+            font_size: 80
+            halign : 'center'
+            color: 1, 1, 1, 1
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.5, 'top': 0.9}
+
+        Button:
+            text: 'Submit'
+            size_hint: None, None
+            halign : 'center'
+            size: 300, 100
+            pos_hint: {'center_x': 0.5, 'center_y': 0.20}
+            background_color: 0.2, 0.6, 1, 1
+            on_press: app.submit()
+
+        Button:
+            text: 'Main\nMenu'
+            size_hint: None, None
+            size: 300, 100
+            halign : 'center'
+            pos_hint: {'center_x': 0.5, 'y': 0.05}
+            background_color: 0.2, 0.6, 1, 1
+            on_press: root.manager.current = 'menu'
+            on_press: app.wipe_popup_labels()
+
+<RefreshScreen@Screen>:
+    name: 'refresh' #Needs success/failure popups otherwise done
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: .532, .532, .532, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+
+        Label:
+            text: 'Crypto Watchlist\nRefresh Prices'
+            font_size: 80
+            halign : 'center'
+            color: 1, 1, 1, 1
+            size_hint: None, None
+            size: self.texture_size
+            pos_hint: {'center_x': 0.5, 'top': 0.8}
+
+
+        Button:
+            text: 'Refresh\nPrices'
+            size_hint: None, None
+            halign : 'center'
+            size: 300, 100
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            background_color: 0.2, 0.6, 1, 1
+            on_press: app.refresh()
+        Label:
+            id: refresh_success
+            text: ''
+            font_size: 80
+            halign : 'center'
+            color: 1, 1, 1, 1
+            size_hint: None, None
+            pos_hint: {'center_x': 0.5, 'top': 0.3}
+        Button:
+            text: 'Main\nMenu'
+            size_hint: None, None
+            size: 300, 100
+            halign : 'center'
+            pos_hint: {'center_x': 0.5, 'y': 0.1}
+            background_color: 0.2, 0.6, 1, 1
+            on_press: root.manager.current = 'menu'
+            on_press: app.wipe_popup_labels()
